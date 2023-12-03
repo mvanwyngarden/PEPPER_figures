@@ -1,0 +1,11 @@
+# Table of contents
+
+format: jb-article
+root: README
+options:
+  numbered: false
+sections:
+- file: notebooks/Figure-2
+- file: notebooks/Figure-3
+- file: notebooks/Figures-4-and-5
+- file: notebooks/Figures-6-7-and-8

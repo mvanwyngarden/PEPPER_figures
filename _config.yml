@@ -1,0 +1,32 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: Modeling Radius Valley Emergence Mechanisms With Multi-Transiting Systems 
+author: Madison VanWyngarden 
+copyright: "2023"
+logo: logo.png
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: force
+  timeout: 300
+
+html:
+  favicon: favicon.ico
+  use_repository_button: true
+    #  use_issues_button: true
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+
+sphinx:
+  html_context:
+    default_mode: light
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/mvanwyngarden/PEPPER # Online location of your book
+
