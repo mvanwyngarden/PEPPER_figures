@@ -1,0 +1,5 @@
+#add commit
+#go into parent directory
+jupyter-book build radvalley_figs #base go into radvalley_figs
+ghp-import -n -p -f _build/html
+#push to github
