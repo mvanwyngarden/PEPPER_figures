@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Figures 4 and 5: System Architectures &#8212; Modeling Radius Valley Emergence Mechanisms With Multi-Transiting Systems</title>
   
@@ -217,7 +217,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="article-header-buttons">
 
 
-<a href="https://github.com/alexdelfranco/radius-valley.git" target="_blank"
+<a href="https://github.com/mvanwyngarden/PEPPER" target="_blank"
    class="btn btn-sm btn-source-repository-button"
    title="Source repository"
    data-bs-placement="bottom" data-bs-toggle="tooltip"
@@ -366,6 +366,18 @@ document.write(`
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">glob</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
 </pre></div>
 </div>
 </div>
@@ -562,8 +574,9 @@ document.write(`
         <span class="n">plot_errors</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyplanets&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envplanets&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">ydisplace</span><span class="p">,</span><span class="n">mechanism_dict</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="n">planet_start_num</span><span class="p">)</span>
         <span class="n">ax2</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envmass&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">ydisplace</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="p">[</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envmasserr&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">planet_start_num</span><span class="p">)</span><span class="o">*</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="s1">&#39;Measured&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">ydisplace</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-        <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyper&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">ydisplace</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyrad&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envper&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">ydisplace</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envrad&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;slategray&#39;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyper&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">ydisplace</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyrad&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        
         
         <span class="c1"># Determine system labels</span>
         <span class="n">envletter</span> <span class="o">=</span> <span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envplanets&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
