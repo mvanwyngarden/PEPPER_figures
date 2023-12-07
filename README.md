@@ -1,6 +1,6 @@
 # Modeling Radius Valley Emergence Mechanisms With Multi-Transiting Systems
 
-[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://wwgolay.github.io/thermal-gs)
+[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://mvanwyngarden.github.io/radvalley_figs)
 
 ## Quickstart
 
