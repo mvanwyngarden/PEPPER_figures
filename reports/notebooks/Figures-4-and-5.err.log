@@ -18,22 +18,57 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-from scipy import stats
-import matplotlib.gridspec as gridspec
+# Main plotting function to generate the figure
+def plot_figure(planet_start_num,planet_num,pdict,mechanism_dict,system_dict,save='null',legend=False):
+    
+    # Create a blank figure and axes
+    fig = plt.figure(figsize=[12, 24],facecolor='white')
+    spec= gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[1,3], wspace=0, figure=fig)
+    ax1=fig.add_subplot(spec[0])
+    ax2=fig.add_subplot(spec[1],sharey=ax1)
+    
+    # Define initial values for label list, current system, and system index
+    labels,system,sysi = [],'null',0
+    
+    # Loop through systems, building top to bottom
+    for i in range(planet_start_num,planet_start_num+planet_num):
+        
+        # Set displacement and plot on right axis
+        ydisplace = 5 * (i-planet_start_num)
+        
+        # Plot the right subplot
+        plot_errors(ax2,pdict['rockyplanets'][i],pdict['envplanets'][i],ydisplace,mechanism_dict,i-planet_start_num)
+        ax2.errorbar(pdict['envmass'][i], ydisplace, xerr=[pdict['envmasserr'][i]], fmt='^', color='k', label=(i-planet_start_num)*'_'+'Measured', zorder=1)
+        ax1.hlines(ydisplace, 0, 115, linestyles="--", color='gray')
+        ax1.scatter(pdict['envper'][i], ydisplace, s=size(pdict['envrad'][i]), color='slategray')
+        ax1.scatter(pdict['rockyper'][i], ydisplace, s=pdict['rockyrad'][i]*40, color='k')
+        
+        # Determine system labels
+        envletter = pdict['envplanets'][i].split(' ')[-1]
+        labels.append(f'{pdict['rockyplanets'][i]}/{envletter}')
+        
+        # Determine which system is being plotted
+        if system != planets['planet name'].iloc[i]: system,sysi = planets['planet name'].iloc[i],i
+
+        # Plot enveloped and rocky planets
+        for j in range(len(system_dict[system]['env'])):
+            ax1.scatter(pdict['envper'][sysi+j], ydisplace, s=size(pdict['envrad'][sysi+j]), color='slategray', alpha=0.3)
+        for j in range(len(system_dict[system]['rocky'])):
+            env_num = len(system_dict[system]['env'])
+            ax1.scatter(pdict['rockyper'][sysi+j*env_num], ydisplace, s=pdict['rockyrad'][sysi+j*env_num]*40, color='k', alpha=0.2)
+    
+    # Plot labels, legends, and save figure
+    label_plot([ax1,ax2],planet_num,labels)
+    if legend: 
+        legend_plot(ax2,planet_num)
+    if save!='null': 
+        plt.savefig(save, dpi=300., bbox_inches='tight')
 ------------------
 
 
-[1;31m---------------------------------------------------------------------------[0m
-[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [1;32mIn[1], line 3[0m
-[0;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[0;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
-[1;32m----> 3[0m [38;5;28;01mimport[39;00m [38;5;21;01mpandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mpd[39;00m
-[0;32m      4[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m [38;5;28;01mimport[39;00m stats
-[0;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mgridspec[39;00m [38;5;28;01mas[39;00m [38;5;21;01mgridspec[39;00m
+[1;36m  Cell [1;32mIn[13], line 28[1;36m[0m
+[1;33m    labels.append(f'{pdict['rockyplanets'][i]}/{envletter}')[0m
+[1;37m                            ^[0m
+[1;31mSyntaxError[0m[1;31m:[0m f-string: unmatched '['
 
-[1;31mModuleNotFoundError[0m: No module named 'pandas'
 

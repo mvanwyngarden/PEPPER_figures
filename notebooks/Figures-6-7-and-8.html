@@ -367,34 +367,21 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="import-data">
 <h2>2. Import Data<a class="headerlink" href="#import-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load data, i.e. outputs from PEPPER</span>
 <span class="n">all_planets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/planets.csv&#39;</span><span class="p">)</span>
 
-<span class="c1"># Mask the data</span>
+<span class="c1"># Mask the dataframe to select planet pairs with mass measurements for the enveloped planet</span>
 <span class="n">mass_mask</span> <span class="o">=</span> <span class="n">all_planets</span><span class="p">[</span><span class="s1">&#39;env mass flag&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
 <span class="n">planets</span> <span class="o">=</span> <span class="n">all_planets</span><span class="p">[</span><span class="n">mass_mask</span><span class="p">]</span>
 
 <span class="c1"># Reindex using the system names</span>
 <span class="n">planets</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;planet name&#39;</span><span class="p">]</span>
-<span class="c1"># planets = planets.reset_index(drop=True)</span>
 </pre></div>
 </div>
 </div>
@@ -410,14 +397,14 @@ document.write(`
 <span class="c1"># Initialize total probability to be less than 0</span>
 <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;PEprobtot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;CPMLprobtot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;PRVprobtot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
 
-<span class="c1"># For each planet, save its minimum mechanism probability</span>
+<span class="c1"># For each planet, save its minimum probability of consistency with each mechanism</span>
 <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">planetnames</span><span class="p">:</span>
     <span class="n">first_name</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">planets</span><span class="p">[</span><span class="s1">&#39;planet name&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">name</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">planets</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">first_name</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">planets</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span><span class="s1">&#39;PEprob&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
     <span class="n">planets</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">first_name</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">planets</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span><span class="s1">&#39;CPMLprob&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
     <span class="n">planets</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">first_name</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">planets</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">name</span><span class="p">,</span><span class="s1">&#39;PRVprob&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 
-<span class="c1"># Remove nonsensical probabilities</span>
+<span class="c1"># Replace nonsensical probabilities with the minimum probability of consistency</span>
 <span class="n">planets</span> <span class="o">=</span> <span class="n">planets</span><span class="p">[</span><span class="n">planets</span><span class="p">[</span><span class="s1">&#39;PEprobtot&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -498,7 +485,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0c1f875544101e9fed1190e5476970bd177ce32e434c04399b6ce1f20c4a1e7b.png" src="../_images/0c1f875544101e9fed1190e5476970bd177ce32e434c04399b6ce1f20c4a1e7b.png" />
+<img alt="../_images/c11fe0a25928b88450b33311ef80bbb34239c6d5a6467d2b6b95c9bec2f6de64.png" src="../_images/c11fe0a25928b88450b33311ef80bbb34239c6d5a6467d2b6b95c9bec2f6de64.png" />
 </div>
 </div>
 </section>
@@ -552,7 +539,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c88987a9d10238a235cf60bd9217f8a90e5459df155b27717dcbd0e2e0514616.png" src="../_images/c88987a9d10238a235cf60bd9217f8a90e5459df155b27717dcbd0e2e0514616.png" />
+<img alt="../_images/b59978f76f06dae7fbf6e1aa022f26a8ac72af6dd0fb1dc50a0b2b109ddc3e9d.png" src="../_images/b59978f76f06dae7fbf6e1aa022f26a8ac72af6dd0fb1dc50a0b2b109ddc3e9d.png" />
 </div>
 </div>
 </section>
@@ -581,7 +568,7 @@ document.write(`
 <span class="c1"># Create labels, vplots, titles, and text lists</span>
 <span class="n">labels</span><span class="p">,</span><span class="n">vplots</span><span class="p">,</span><span class="n">titles</span><span class="p">,</span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PE&#39;</span><span class="p">,</span> <span class="s1">&#39;CPML&#39;</span><span class="p">,</span> <span class="s1">&#39;PRV&#39;</span><span class="p">],[],</span> <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;-0.5 $&lt;$ [Fe/H] $\leq$ -0.1&#39;</span><span class="p">,</span> \
                             <span class="sa">r</span><span class="s1">&#39;-0.1 $&lt;$ [Fe/H] $\leq$ 0.1&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;0.1 $&lt;$ [Fe/H] $\leq$ 0.5&#39;</span><span class="p">],</span> \
-                            <span class="p">[{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">2.8</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="s1">&#39;N=9&#39;</span><span class="p">},{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">2.75</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="s1">&#39;N=14&#39;</span><span class="p">},{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">2.75</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="s1">&#39;N=12&#39;</span><span class="p">}]</span>
+                            <span class="p">[{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">2.95</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="s1">&#39;N=9&#39;</span><span class="p">},{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">2.9</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="s1">&#39;N=14&#39;</span><span class="p">},{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">2.9</span><span class="p">,</span><span class="s1">&#39;text&#39;</span><span class="p">:</span><span class="s1">&#39;N=12&#39;</span><span class="p">}]</span>
 
 <span class="c1"># Plot each of the violin plots and set axis labels for each</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span> 
@@ -605,7 +592,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4793c245b5d37f5f8fedccc994847bafe1e25cf6ba18319e2390f3ceffd5395d.png" src="../_images/4793c245b5d37f5f8fedccc994847bafe1e25cf6ba18319e2390f3ceffd5395d.png" />
+<img alt="../_images/000fc79d88838f43a607f2db2709dfe73293dd62732e1595a96f2f407a594ff5.png" src="../_images/000fc79d88838f43a607f2db2709dfe73293dd62732e1595a96f2f407a594ff5.png" />
 </div>
 </div>
 </section>
