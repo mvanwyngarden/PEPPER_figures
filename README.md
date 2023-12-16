@@ -4,7 +4,7 @@
 
 ## Quickstart
 
-This site hosts a series of Jupyter notebooks, each of which can reproduce single or multiple figures from the paper. All of the data is included in this repository in the `data` directory.
+This site hosts a series of Jupyter notebooks, each of which can reproduce single or multiple figures from the paper. All of the data and notebooks are included in this [repository](https://github.com/mvanwyngarden/PEPPER_figures). The data, located in the `data` directory, was generated using the software [PEPPER](https://github.com/mvanwyngarden/PEPPER).
 
 ## Questions or Issues
 
