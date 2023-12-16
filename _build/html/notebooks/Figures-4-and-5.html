@@ -569,7 +569,7 @@ document.write(`
         
         <span class="c1"># Determine system labels</span>
         <span class="n">envletter</span> <span class="o">=</span> <span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envplanets&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyplanets&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">envletter</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;rockyplanets&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">envletter</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         
         <span class="c1"># Determine which system is being plotted</span>
         <span class="k">if</span> <span class="n">system</span> <span class="o">!=</span> <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;planet name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">system</span><span class="p">,</span><span class="n">sysi</span> <span class="o">=</span> <span class="n">planets</span><span class="p">[</span><span class="s1">&#39;planet name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">i</span>
@@ -590,14 +590,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">28</span>
-    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyplanets&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">envletter</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-                            <span class="o">^</span>
-<span class="ne">SyntaxError</span>: f-string: unmatched &#39;[&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="generating-the-figures">
@@ -610,7 +602,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8de692c28f311ab66be421a06f5c02bb70c09b978175536ae29de2c65c7745fb.png" src="../_images/8de692c28f311ab66be421a06f5c02bb70c09b978175536ae29de2c65c7745fb.png" />
+<img alt="../_images/5cda1259f01f82fa28fbc7cc44843d140f1ae075cba9248e6a4d75ad75841d68.png" src="../_images/5cda1259f01f82fa28fbc7cc44843d140f1ae075cba9248e6a4d75ad75841d68.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -621,7 +613,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1515a799cfce12644b14fe6611d6ecdb6b9bd060da820344059e60309f5f6822.png" src="../_images/1515a799cfce12644b14fe6611d6ecdb6b9bd060da820344059e60309f5f6822.png" />
+<img alt="../_images/58abfe2767b77650f1dcfbfec32f63c253ece693575604a33e0a532fdc115f1b.png" src="../_images/58abfe2767b77650f1dcfbfec32f63c253ece693575604a33e0a532fdc115f1b.png" />
 </div>
 </div>
 </section>
