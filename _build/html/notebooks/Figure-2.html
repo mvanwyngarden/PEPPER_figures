@@ -365,18 +365,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="import-data">
@@ -403,24 +391,21 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bin objects by temperature percentiles</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bin objects by stellar effective temperature</span>
+<span class="c1">#Planets are separated into those orbiting stars with effective temps below 4700 K and those above 4700 K</span>
+<span class="c1">#We make this distinction to reflect our choice that the location of the radius valley changes </span>
+<span class="c1">#from 1.6 Rearth around cooler stars to 1.8 Rearth around Sun-like stars</span>
 
-<span class="c1"># 15th percentile</span>
 <span class="n">bin1</span><span class="o">=</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">3900</span>
 
-<span class="c1"># 30th percentile</span>
 <span class="n">bin2</span><span class="o">=</span><span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">4550</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">3900</span><span class="p">)</span>
 
-<span class="c1"># 50th percentile</span>
 <span class="n">bin3</span><span class="o">=</span><span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">4700</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">4550</span><span class="p">)</span>
 
-<span class="c1"># 65th percentile</span>
 <span class="n">bin4</span><span class="o">=</span><span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">4900</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">4700</span><span class="p">)</span>
 
-<span class="c1"># 85th percentile</span>
 <span class="n">bin5</span><span class="o">=</span><span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">5700</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">4900</span><span class="p">)</span>
 
-<span class="c1"># 100th percentile</span>
 <span class="n">bin6</span><span class="o">=</span><span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">6400</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">withmass</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">5700</span><span class="p">)</span>
 
 <span class="n">bins</span> <span class="o">=</span> <span class="p">[</span><span class="n">bin1</span><span class="p">,</span><span class="n">bin2</span><span class="p">,</span><span class="n">bin3</span><span class="p">,</span><span class="n">bin4</span><span class="p">,</span><span class="n">bin5</span><span class="p">,</span><span class="n">bin6</span><span class="p">]</span>
@@ -444,10 +429,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_bin</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">star_df</span><span class="p">,</span><span class="n">star</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="c1"># Filter dataframe</span>
+    <span class="c1"># Mask dataframe based on stellar bin</span>
     <span class="n">sys_stars</span> <span class="o">=</span> <span class="n">star_df</span><span class="p">[</span><span class="s1">&#39;star temp&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">star</span>
-
-    <span class="c1"># Identify subsets of the filtered dataset</span>
+    <span class="c1"># Identify planet properties based on bin</span>
     <span class="n">rockyrad</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">star_df</span><span class="p">[</span><span class="s1">&#39;rocky rad&#39;</span><span class="p">][</span><span class="n">sys_stars</span><span class="p">])</span>
     <span class="n">envrad</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">star_df</span><span class="p">[</span><span class="s1">&#39;env rad&#39;</span><span class="p">][</span><span class="n">sys_stars</span><span class="p">])</span>
     <span class="n">rockyperiod</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">star_df</span><span class="p">[</span><span class="s1">&#39;rocky period&#39;</span><span class="p">][</span><span class="n">sys_stars</span><span class="p">])</span>
@@ -477,7 +461,7 @@ document.write(`
 
 <span class="c1"># For each binned group of stars</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bins</span><span class="p">)):</span>
-    <span class="c1"># Loop through and plot all stars in the bin</span>
+    <span class="c1"># Loop through and plot all planets associated with that planetary system</span>
     <span class="k">for</span> <span class="n">star</span> <span class="ow">in</span> <span class="n">stars</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;bin</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]:</span> <span class="n">plot_bin</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">withmass</span><span class="p">,</span><span class="n">star</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="n">i</span><span class="o">%</span><span class="k">3</span>==0)
 
 <span class="c1"># Loop through each vertical axis</span>
@@ -495,11 +479,14 @@ document.write(`
         <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Radius (R$\oplus$)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="c1"># Plot horizontal lines</span>
-        <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mf">1.6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mf">1.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+            <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mf">1.6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>  <span class="c1">#line showing our location of the radius valley</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mf">1.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>  <span class="c1">#line showing our location of the radius valley</span>
 
 <span class="c1"># Set subplot titles</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T_</span><span class="si">{eff}</span><span class="s1">\leq$ 3900&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -516,7 +503,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1639a022949d355d4e2c5e7d3c24bbab93025b7ce8d5d7cd2f8e0068b97cada8.png" src="../_images/1639a022949d355d4e2c5e7d3c24bbab93025b7ce8d5d7cd2f8e0068b97cada8.png" />
+<img alt="../_images/8a2b127d6b4a3cdc8f7c3c21cd8027fd1d67f338923f9d93c9faa7c8e2b918d8.png" src="../_images/8a2b127d6b4a3cdc8f7c3c21cd8027fd1d67f338923f9d93c9faa7c8e2b918d8.png" />
 </div>
 </div>
 </section>

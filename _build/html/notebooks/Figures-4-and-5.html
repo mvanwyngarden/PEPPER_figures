@@ -368,20 +368,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="import-data">
@@ -390,7 +376,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in data</span>
 <span class="n">all_planets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/planets.csv&#39;</span><span class="p">)</span>
-<span class="c1"># Mask dataframe</span>
+<span class="c1"># Mask dataframe to select all enveloped planets with measured masses </span>
 <span class="n">mass_mask</span> <span class="o">=</span> <span class="n">all_planets</span><span class="p">[</span><span class="s1">&#39;env mass flag&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span>
 <span class="n">planets</span> <span class="o">=</span> <span class="n">all_planets</span><span class="p">[</span><span class="n">mass_mask</span><span class="p">]</span>
 </pre></div>
@@ -448,7 +434,7 @@ document.write(`
 <h2>4. Helper Functions<a class="headerlink" href="#helper-functions" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Returns median error and absolute deviation</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Returns median error and median absolute deviation</span>
 <span class="k">def</span> <span class="nf">median_err</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
     <span class="n">median</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="n">mad</span><span class="o">=</span><span class="n">stats</span><span class="o">.</span><span class="n">median_abs_deviation</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
@@ -466,7 +452,7 @@ document.write(`
     <span class="n">med</span><span class="p">,</span><span class="n">err</span> <span class="o">=</span> <span class="n">median_err</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="c1"># Plot the errorbar</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">med</span><span class="p">,</span> <span class="n">ydisplace</span><span class="o">+</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span><span class="n">xerr</span><span class="o">=</span><span class="n">err</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="p">((</span><span class="n">label_counter</span><span class="o">//</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="n">mech</span><span class="p">))</span>
-    <span class="c1"># Conditionally plot an arrow</span>
+    <span class="c1"># Conditionally plot an arrow for failed models</span>
     <span class="k">if</span><span class="p">(</span><span class="n">vals</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">500</span><span class="p">):</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">med</span><span class="p">,</span> <span class="n">ydisplace</span><span class="o">+</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">shape</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">],</span>
                  <span class="n">length_includes_head</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">head_length</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">head_width</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
@@ -478,7 +464,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a data file</span>
 <span class="k">def</span> <span class="nf">load_file</span><span class="p">(</span><span class="n">mech</span><span class="p">,</span><span class="n">rocky</span><span class="p">,</span><span class="n">env</span><span class="p">,</span><span class="n">datadir</span><span class="o">=</span><span class="s1">&#39;../data&#39;</span><span class="p">):</span>
-    <span class="c1"># Load and return values from a csv</span>
+    <span class="c1"># Load and return values from a csv, these are the outputs from PEPPER</span>
     <span class="n">file</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">datadir</span><span class="si">}</span><span class="s1">/SCC_Outputs/</span><span class="si">{</span><span class="n">rocky</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">env</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">mech</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
     <span class="n">vals</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">file</span><span class="p">,</span><span class="n">vals</span>
@@ -490,7 +476,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Main plotting function for the right-hand subplots</span>
 <span class="k">def</span> <span class="nf">plot_errors</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">rocky</span><span class="p">,</span><span class="n">env</span><span class="p">,</span><span class="n">ydisplace</span><span class="p">,</span><span class="n">mechanism_dict</span><span class="p">,</span><span class="n">label_counter</span><span class="p">):</span>
-    <span class="c1"># Load Files</span>
+    <span class="c1"># Load files</span>
     <span class="n">filePE</span><span class="p">,</span><span class="n">PEvals</span> <span class="o">=</span> <span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;PE&#39;</span><span class="p">,</span><span class="n">rocky</span><span class="p">,</span><span class="n">env</span><span class="p">)</span>
     <span class="n">fileCPML</span><span class="p">,</span><span class="n">CPMLvals</span> <span class="o">=</span> <span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;CPML&#39;</span><span class="p">,</span><span class="n">rocky</span><span class="p">,</span><span class="n">env</span><span class="p">)</span>
     <span class="n">filePRV</span><span class="p">,</span><span class="n">PRVvals</span> <span class="o">=</span> <span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;PRV&#39;</span><span class="p">,</span><span class="n">rocky</span><span class="p">,</span><span class="n">env</span><span class="p">)</span>
@@ -506,9 +492,12 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determine the size of the planet plotted</span>
 <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="n">rad</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">rad</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="n">rad</span> <span class="o">*</span> <span class="mi">40</span>
-    <span class="k">elif</span> <span class="n">rad</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span> <span class="k">return</span> <span class="p">(</span><span class="n">rad</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">150</span>
-    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="p">(</span><span class="n">rad</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">300</span>
+    <span class="k">if</span> <span class="n">rad</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="n">rad</span> <span class="o">*</span> <span class="mi">40</span>
+    <span class="k">elif</span> <span class="n">rad</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="p">(</span><span class="n">rad</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">150</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="p">(</span><span class="n">rad</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">300</span>
 </pre></div>
 </div>
 </div>
@@ -578,7 +567,6 @@ document.write(`
         <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envper&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">ydisplace</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">size</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envrad&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;slategray&#39;</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyper&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">ydisplace</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyrad&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
         
-        
         <span class="c1"># Determine system labels</span>
         <span class="n">envletter</span> <span class="o">=</span> <span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;envplanets&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyplanets&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">envletter</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -595,8 +583,18 @@ document.write(`
     
     <span class="c1"># Plot labels, legends, and save figure</span>
     <span class="n">label_plot</span><span class="p">([</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">],</span><span class="n">planet_num</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span> <span class="n">legend_plot</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span><span class="n">planet_num</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">save</span><span class="o">!=</span><span class="s1">&#39;null&#39;</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mf">300.</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span> 
+        <span class="n">legend_plot</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span><span class="n">planet_num</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">save</span><span class="o">!=</span><span class="s1">&#39;null&#39;</span><span class="p">:</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mf">300.</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">28</span>
+    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;rockyplanets&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">envletter</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                            <span class="o">^</span>
+<span class="ne">SyntaxError</span>: f-string: unmatched &#39;[&#39;
 </pre></div>
 </div>
 </div>
