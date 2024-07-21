@@ -1,6 +1,6 @@
 # Modeling Radius Valley Emergence Mechanisms With Multi-Transiting Systems
 
-[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://mvanwyngarden.github.io/radvalley_figs)
+[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://mvanwyngarden.github.io/PEPPER_figures/README.html)
 
 ## Quickstart
 
