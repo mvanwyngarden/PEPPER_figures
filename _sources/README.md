@@ -9,4 +9,3 @@ This site hosts a series of Jupyter notebooks, each of which can reproduce singl
 ## Questions or Issues
 
 Please post any questions or issues you may have [here](https://github.com/mvanwyngarden/PEPPER/issues).
->>>>>>> f328d6865134b4e34260904c6a2001add627bdcc
